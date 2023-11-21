@@ -1,0 +1,24 @@
+name: Build application
+on:
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          target: 'desktop'
+          arch: 'x64'
+      - name: Build
+        run: |
+          ls -la
+          qmake
+          make
+      - run: ls -la
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+           name: build
+           path: build
