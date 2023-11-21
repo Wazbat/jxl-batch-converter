@@ -11,7 +11,7 @@ jobs:
         with:
             host: 'linux'
             target: 'desktop'
-            tools: 'qtbase qtdeclarative qtquickcontrols2 qtquickcompiler'
+            tools: 'qtquickcompiler'
       - name: Build
         run: |
           ls -la
