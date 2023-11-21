@@ -3,15 +3,8 @@ on:
   pull_request:
 jobs:
   build:
-    strategy:
-      matrix:
-        qt:
-          - 5.15.2
-        spec:
-          - linux-clang
-          - win32-msvc
     runs-on: windows-latest
-    name: Build ${{ matrix.spec }}
+    name: Build
     steps:
       - uses: actions/checkout@v3
       - uses: msys2/setup-msys2@v2
@@ -24,15 +17,14 @@ jobs:
         with:
             host: 'windows'
             target: 'desktop'
-            version: ${{ matrix.qt }}
       - name: Build
         run: |
           ls
-          qmake jxl-batch-converter.pro -spec ${{ matrix.spec }} CONFIG+=qtquickcompiler
+          qmake jxl-batch-converter.pro CONFIG+=qtquickcompiler
           make
       - run: ls
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-           name: ${{ matrix.spec }}-build
+           name: build
            path: ./build
