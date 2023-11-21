@@ -22,10 +22,10 @@ jobs:
             version: ${{ matrix.qt }}
       - name: Build
         run: |
-          ls -la
+          ls
           qmake jxl-batch-converter.pro -spec ${{ matrix.spec }} CONFIG+=qtquickcompiler
           make
-      - run: ls -la
+      - run: ls
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
