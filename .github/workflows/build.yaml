@@ -6,21 +6,17 @@ jobs:
     runs-on: windows-latest
     name: Build
     steps:
-      - uses: actions/checkout@v3
-      - name: Install Visual Studio Build Tools
-        run: |
-          choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
-    
+      - uses: actions/checkout@v3    
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
             host: 'windows'
             target: 'desktop'
+            arch: 'win64_msvc2019_64'
       - name: Build
         run: |
           ls
-          qmake jxl-batch-converter.pro CONFIG+=qtquickcompiler
-          export QT_MSVC_VERSION=2019
+          qmake -d "CONFIG+=qtquickcompiler" jxl-batch-converter.pro
           make
       - run: ls
       - name: Upload artifact
