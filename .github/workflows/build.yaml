@@ -9,12 +9,13 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          target: 'desktop'
-          arch: 'x64'
+            host: 'linux'
+            target: 'desktop'
+            tools: 'qtbase qtdeclarative qtquickcontrols2 qtquickcompiler'
       - name: Build
         run: |
           ls -la
-          qmake
+          qmake jxl-batch-converter.pro -spec linux-clang CONFIG+=qtquickcompiler
           make
       - run: ls -la
       - name: Upload artifact
