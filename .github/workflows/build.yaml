@@ -20,7 +20,7 @@ jobs:
         run: |
           ls
           qmake jxl-batch-converter.pro CONFIG+=qtquickcompiler
-          qmake --set kits.default.host.x86_64-pe-windows-msvc2019
+          export QT_MSVC_VERSION=2019
           make
       - run: ls
       - name: Upload artifact
