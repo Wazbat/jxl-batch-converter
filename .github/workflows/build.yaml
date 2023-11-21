@@ -9,26 +9,25 @@ jobs:
           - 5.15.2
         spec:
           - linux-clang
-          - win32-g++
+          - win32-msvc
     runs-on: ubuntu-latest
     name: Build ${{ matrix.spec }}
     steps:
       - uses: actions/checkout@v3
-      - run: sudo apt-get install mingw-w64
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-            host: 'linux'
+            host: 'windows'
             target: 'desktop'
             version: ${{ matrix.qt }}
       - name: Build
         run: |
           ls -la
           qmake jxl-batch-converter.pro -spec ${{ matrix.spec }} CONFIG+=qtquickcompiler
-          make
+          nmake
       - run: ls -la
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
            name: ${{ matrix.spec }}-build
-           path: ./jxl-batch-converter
+           path: ./build
