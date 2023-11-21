@@ -9,7 +9,7 @@ jobs:
           - 5.15.2
         spec:
           - linux-clang
-          - win32-msvc
+          - win32-g++
     runs-on: ubuntu-latest
     name: Build ${{ matrix.spec }}
     steps:
