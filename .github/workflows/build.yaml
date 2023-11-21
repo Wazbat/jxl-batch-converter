@@ -17,14 +17,14 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-            host: 'windows'
+            host: 'linux'
             target: 'desktop'
             version: ${{ matrix.qt }}
       - name: Build
         run: |
           ls -la
           qmake jxl-batch-converter.pro -spec ${{ matrix.spec }} CONFIG+=qtquickcompiler
-          nmake
+          make
       - run: ls -la
       - name: Upload artifact
         uses: actions/upload-artifact@v2
