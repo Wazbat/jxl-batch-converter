@@ -10,8 +10,8 @@ jobs:
       - name: List packages
         run: |
           python -m pip install aqtinstall
-          echo "::add-path::$(python -m site --user-site)/Scripts"
-          aqt list-qt windows desktop --modules 5.15.2 win64_msvc2019_64
+          python -m aqtinstall install aqtinstall
+          python -m aqt list-qt windows desktop --modules 5.15.2 win64_msvc2019_64
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
