@@ -1,0 +1,37 @@
+name: Build application
+on:
+  pull_request:
+jobs:
+  build:
+    runs-on: windows-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v3
+      - name: List packages
+        run: |
+          python -m pip install aqtinstall
+          python -m aqtinstall install aqtinstall
+          python -m aqt list-qt windows desktop --modules 5.15.2 win64_msvc2019_64
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+          modules: 'qtbase'
+      # Required to set up and configure cl
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Create makefile
+        run: |
+          qmake "CONFIG+=qtquickcompiler" -spec win32-g++ jxl-batch-converter.pro
+          ls
+      - name: Build
+        run: |
+          make clean
+          make
+      - run: ls
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+           name: build
+           path: ./build
