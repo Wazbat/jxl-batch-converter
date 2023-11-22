@@ -17,11 +17,10 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Create makefile
         run: |
-          qmake "CONFIG+=qtquickcompiler" jxl-batch-converter.pro
+          qmake "CONFIG+=qtquickcompiler" -spec win32-g++ jxl-batch-converter.pro
           ls
       - name: Build
         run: |
-          make qmake_all
           make clean
           make
       - run: ls
