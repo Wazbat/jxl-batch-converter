@@ -13,6 +13,7 @@ jobs:
           host: 'windows'
           target: 'desktop'
           arch: 'win64_msvc2019_64'
+          modules: 'widgets'
       # Required to set up and configure cl
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Create makefile
