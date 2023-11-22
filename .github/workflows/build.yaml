@@ -15,10 +15,14 @@ jobs:
           arch: 'win64_msvc2019_64'
       # Required to set up and configure cl
       - uses: ilammy/msvc-dev-cmd@v1
-      - name: Build
+      - name: Create makefile
         run: |
           ls
-          qmake -d "CONFIG+=qtquickcompiler" jxl-batch-converter.pro
+          qmake -o makefile "CONFIG+=qtquickcompiler" jxl-batch-converter.pro
+          ls
+      - name: Build
+        run: |
+          type makefile
           make
       - run: ls
       - name: Upload artifact
