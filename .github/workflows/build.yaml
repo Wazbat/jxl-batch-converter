@@ -10,9 +10,11 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-            host: 'windows'
-            target: 'desktop'
-            arch: 'win64_msvc2019_64'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_msvc2019_64'
+      # Required to set up and configure cl
+      - uses: ilammy/msvc-dev-cmd@v1
       - name: Build
         run: |
           ls
