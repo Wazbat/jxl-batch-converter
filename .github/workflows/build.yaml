@@ -7,9 +7,6 @@ jobs:
     name: Build
     steps:
       - uses: actions/checkout@v3
-      - name: List available modules
-        run: |
-          aqt list-qt windows desktop --modules 5.15.2 win64_msvc2019_64
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
