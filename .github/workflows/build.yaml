@@ -17,12 +17,12 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
       - name: Create makefile
         run: |
-          ls
-          qmake -o makefile "CONFIG+=qtquickcompiler" jxl-batch-converter.pro
+          qmake "CONFIG+=qtquickcompiler" jxl-batch-converter.pro
           ls
       - name: Build
         run: |
-          type makefile
+          make qmake_all
+          make clean
           make
       - run: ls
       - name: Upload artifact
